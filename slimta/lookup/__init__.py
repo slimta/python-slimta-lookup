@@ -19,32 +19,5 @@
 # THE SOFTWARE.
 #
 
-from setuptools import setup, find_packages
-
-
-setup(name='python-slimta-lookup',
-      version='0.0.0',
-      author='Ian Good',
-      author_email='icgood@gmail.com',
-      description='Control slimta actions and policies with external lookups.',
-      license='MIT',
-      url='http://slimta.org/',
-      packages=find_packages(),
-      namespace_packages=['slimta'],
-      extras_require={
-          'redis': ['redis'],
-      },
-      tests_require=['nose',
-                     'mox'],
-      test_suite='nose.collector',
-      classifiers=['Development Status :: 3 - Alpha',
-                   'Topic :: Communications :: Email :: Mail Transport Agents',
-                   'Intended Audience :: Developers',
-                   'Intended Audience :: Information Technology',
-                   'License :: OSI Approved :: MIT License',
-                   'Programming Language :: Python',
-                   'Programming Language :: Python :: 2.6',
-                   'Programming Language :: Python :: 2.7'])
-
 
 # vim:et:fdm=marker:sts=4:sw=4:ts=4

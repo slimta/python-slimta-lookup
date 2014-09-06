@@ -19,32 +19,31 @@
 # THE SOFTWARE.
 #
 
-from setuptools import setup, find_packages
+"""This package contains several implementations of the slimta lookup
+mechanism, which provides a simple interface to control actions and policies
+with external lookups. Under normal circumstances, slimta lookup drivers do
+not modify their backend data source.
 
+Drivers must implement this interface:
 
-setup(name='python-slimta-lookup',
-      version='0.0.0',
-      author='Ian Good',
-      author_email='icgood@gmail.com',
-      description='Control slimta actions and policies with external lookups.',
-      license='MIT',
-      url='http://slimta.org/',
-      packages=find_packages(),
-      namespace_packages=['slimta'],
-      extras_require={
-          'redis': ['redis'],
-      },
-      tests_require=['nose',
-                     'mox'],
-      test_suite='nose.collector',
-      classifiers=['Development Status :: 3 - Alpha',
-                   'Topic :: Communications :: Email :: Mail Transport Agents',
-                   'Intended Audience :: Developers',
-                   'Intended Audience :: Information Technology',
-                   'License :: OSI Approved :: MIT License',
-                   'Programming Language :: Python',
-                   'Programming Language :: Python :: 2.6',
-                   'Programming Language :: Python :: 2.7'])
+.. py:class:: LookupInterface
 
+   This class demonstrates the methods that a class implementing slimta lookup
+   must implement. Note, this class exists in documentation only, it does not
+   need to be a inherited.
+
+   .. py:method:: lookup(**kwargs)
+
+      The keyword arguments will be used by the lookup driver to return a
+      dictionary-like object that will be used to affect actions or policy. For
+      some drivers, these keywords may be used with a template to produce a
+      lookup key. For SQL-style drivers, they might be used in a ``WHERE``
+      clause of a ``SELECT`` query.
+
+      :param kwargs: Used by the driver to lookup records.
+      :type kwargs: keyword arguments
+      :returns: A dictionary if a record was found, ``None`` otherwise.
+
+"""
 
 # vim:et:fdm=marker:sts=4:sw=4:ts=4
