@@ -37,7 +37,7 @@ https://docs.python.org/2/library/stdtypes.html#context-manager-types
 from __future__ import absolute_import
 
 import sqlite3
-from collections import Sequence
+from collections import Mapping
 from contextlib import contextmanager
 
 __all__ = ['DBAPI2Lookup', 'SQLite3Lookup']
@@ -70,7 +70,7 @@ class DBAPI2Lookup(object):
     """
 
     def __init__(self, conn_ctxmgr, query, query_param_order=None,
-                 result_order=None, conn):
+                 result_order=None, conn=None):
         super(DBAPI2Lookup, self).__init__()
         self.query = query
         self.query_param_order = query_param_order
@@ -110,7 +110,7 @@ class DBAPI2Lookup(object):
                     except AttributeError:
                         result_order = self.result_order
                     ret = {}
-                    for i, key in enumerate(self.result_order):
+                    for i, key in enumerate(result_order):
                         ret[key] = row[i]
                     return ret
                 return row
