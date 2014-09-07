@@ -104,7 +104,11 @@ class DBAPI2Lookup(object):
                 row = cur.fetchone()
                 if not row:
                     return
-                if not isinstance(row, Sequence):
+                if not isinstance(row, Mapping):
+                    try:
+                        result_order = row.keys()
+                    except AttributeError:
+                        result_order = self.result_order
                     ret = {}
                     for i, key in enumerate(self.result_order):
                         ret[key] = row[i]
