@@ -24,26 +24,45 @@ mechanism, which provides a simple interface to control actions and policies
 with external lookups. Under normal circumstances, slimta lookup drivers do
 not modify their backend data source.
 
-Drivers must implement this interface:
-
-.. py:class:: LookupInterface
-
-   This class demonstrates the methods that a class implementing slimta lookup
-   must implement. Note, this class exists in documentation only, it does not
-   need to be a inherited.
-
-   .. py:method:: lookup(**kwargs)
-
-      The keyword arguments will be used by the lookup driver to return a
-      dictionary-like object that will be used to affect actions or policy. For
-      some drivers, these keywords may be used with a template to produce a
-      lookup key. For SQL-style drivers, they might be used in a ``WHERE``
-      clause of a ``SELECT`` query.
-
-      :param kwargs: Used by the driver to lookup records.
-      :type kwargs: keyword arguments
-      :returns: A dictionary if a record was found, ``None`` otherwise.
-
 """
+
+class LookupBase(object):
+    """Inherit this class to implement a slimta lookup driver. Only the
+    :meth:`.lookup` method must be overridden.
+
+    """
+
+    def lookup(self, **kwargs):
+        """The keyword arguments will be used by the lookup driver to return a
+        dictionary-like object that will be used to affect actions or policy.
+        For some drivers, these keywords may be used with a template to produce
+        a lookup key. For SQL-style drivers, they might be used in a ``WHERE``
+        clause of a ``SELECT`` query.
+
+        :param kwargs: Used by the driver to lookup records.
+        :type kwargs: keyword arguments
+        :returns: A dictionary if a record was found, ``None`` otherwise.
+
+        """
+        raise NotImplementedError()
+
+    def lookup_address(self, address, **extra):
+        """A convenience method where the given address is passed in as the
+        ``address`` keyword to :meth:`.lookup`. If the address has domain part,
+        it is substringed and passed in as the ``domain`` keyword a well.
+
+        :param address: An address to lookup, either as the full address or as
+                        its domain part.
+        :type address: str
+        :param extra: Additional keyword arguments to pass in to
+                      :meth:`.lookup`.
+        :type extra: keyword arguments
+
+        """
+        if '@' in address:
+            domain = address.rsplit('@', 1)[1]
+            return self.lookup(address=address, domain=domain, **extra)
+        return self.lookup(address=address, **extra)
+
 
 # vim:et:fdm=marker:sts=4:sw=4:ts=4

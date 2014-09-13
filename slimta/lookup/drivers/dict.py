@@ -27,10 +27,12 @@ a persistent backend like :py:mod:`shelve`.
 
 from __future__ import absolute_import
 
+from . import LookupBase
+
 __all__ = ['DictLookup']
 
 
-class DictLookup(object):
+class DictLookup(LookupBase):
     """Instantiate this class with a Python dictionary-like object and it may
     be used as a slimta lookup interface.
 
@@ -60,8 +62,8 @@ class DictLookup(object):
         :returns: A dictionary if a record was found, ``None`` otherwise.
 
         """
-        key = self.key_template.format(**kwargs)
         try:
+            key = self.key_template.format(**kwargs)
             return self.backend[key]
         except KeyError:
             pass

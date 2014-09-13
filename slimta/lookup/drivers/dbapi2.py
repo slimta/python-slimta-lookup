@@ -40,10 +40,12 @@ import sqlite3
 from collections import Mapping
 from contextlib import contextmanager
 
+from . import LookupBase
+
 __all__ = ['DBAPI2Lookup', 'SQLite3Lookup']
 
 
-class DBAPI2Lookup(object):
+class DBAPI2Lookup(LookupBase):
     """Implements the slimta lookup interface using the generic `DB API 2.0`_
     specification.
 

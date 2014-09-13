@@ -37,6 +37,8 @@ import json
 import redis
 from gevent import socket
 
+from . import LookupBase
+
 __all__ = ['RedisLookup']
 
 
@@ -49,7 +51,7 @@ class _GeventConnection(redis.Connection):
         return sock
 
 
-class RedisLookup(object):
+class RedisLookup(LookupBase):
     """Implements the slimta lookup interface using the redis key-value storage
     as the backend layer.
 
@@ -103,7 +105,10 @@ class RedisLookup(object):
         :returns: A dictionary if a record was found, ``None`` otherwise.
 
         """
-        key = self.key_template.format(**kwargs)
+        try:
+            key = self.key_template.format(**kwargs)
+        except KeyError:
+            return
         return self._key_lookup(key)
 
 
