@@ -31,6 +31,7 @@ setup(name='python-slimta-lookup',
       url='http://slimta.org/',
       packages=find_packages(),
       namespace_packages=['slimta'],
+      install_requires=['passlib'],
       extras_require={
           'redis': ['redis'],
       },
