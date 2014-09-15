@@ -60,7 +60,7 @@ class LookupPolicy(QueuePolicy):
     """
 
     def __init__(self, lookup, on_sender=False, on_rcpts=True):
-        super(LookupAuth, self).__init__()
+        super(LookupPolicy, self).__init__()
         self.lookup = lookup
         self.on_sender = on_sender
         self.on_rcpts = on_rcpts
