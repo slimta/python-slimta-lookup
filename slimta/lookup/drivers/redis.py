@@ -109,7 +109,9 @@ class RedisLookup(LookupBase):
             key = self.key_template.format(**kwargs)
         except KeyError:
             return
-        return self._key_lookup(key)
+        ret = self._key_lookup(key)
+        self.log(__name__, kwargs, ret)
+        return ret
 
 
 # vim:et:fdm=marker:sts=4:sw=4:ts=4

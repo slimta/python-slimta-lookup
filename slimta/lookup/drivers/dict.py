@@ -62,11 +62,14 @@ class DictLookup(LookupBase):
         :returns: A dictionary if a record was found, ``None`` otherwise.
 
         """
+        ret = None
         try:
             key = self.key_template.format(**kwargs)
-            return self.backend[key]
+            ret = self.backend[key]
         except KeyError:
             pass
+        self.log(__name__, kwargs, ret)
+        return ret
 
 
 # vim:et:fdm=marker:sts=4:sw=4:ts=4

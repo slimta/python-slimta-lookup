@@ -26,6 +26,15 @@ not modify their backend data source.
 
 """
 
+from __future__ import absolute_import
+
+import logging
+
+from slimta.logging import logline
+
+__all__ = ['LookupBase']
+
+
 class LookupBase(object):
     """Inherit this class to implement a slimta lookup driver. Only the
     :meth:`.lookup` method must be overridden.
@@ -63,6 +72,23 @@ class LookupBase(object):
             domain = address.rsplit('@', 1)[1]
             return self.lookup(address=address, domain=domain, **extra)
         return self.lookup(address=address, **extra)
+
+    def log(self, name, kwargs, ret):
+        """Implementing drivers should call this method to log the lookup
+        transaction.
+
+        :param name: The module name, e.g. ``__name__``.
+        :type name: str
+        :param kwargs: The keyword arguments given to :meth:`.lookup`.
+        :type kwargs: dict
+        :param ret: The return value of the lookup, e.g. a dictionary or
+                    ``None``.
+
+        """
+        logger = logging.getLogger(name)
+        operation = 'notfound' if ret is None else 'found'
+        data = {'info': kwargs, 'return': ret}
+        logline(logger.debug, 'lookup', id(self), operation, **data)
 
 
 # vim:et:fdm=marker:sts=4:sw=4:ts=4

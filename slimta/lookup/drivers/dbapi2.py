@@ -87,15 +87,7 @@ class DBAPI2Lookup(LookupBase):
         else:
             self.conn_ctxmgr = conn_ctxmgr
 
-    def lookup(self, **kwargs):
-        """Using the keyword arguments as macros to produce a key string from
-        ``key_template``, the value associated with the key is returned.
-
-        :param kwargs: Used to produce a key string from the template.
-        :type kwargs: keyword arguments
-        :returns: A dictionary if a record was found, ``None`` otherwise.
-
-        """
+    def _do_lookup(self, kwargs):
         params = kwargs
         if self.query_param_order is not None:
             params = [kwargs[key] for key in self.query_param_order]
@@ -119,6 +111,19 @@ class DBAPI2Lookup(LookupBase):
             finally:
                 conn.rollback()
                 cur.close()
+
+    def lookup(self, **kwargs):
+        """Using the keyword arguments as macros to produce a key string from
+        ``key_template``, the value associated with the key is returned.
+
+        :param kwargs: Used to produce a key string from the template.
+        :type kwargs: keyword arguments
+        :returns: A dictionary if a record was found, ``None`` otherwise.
+
+        """
+        ret = self._do_lookup(kwargs)
+        self.log(__name__, kwargs, ret)
+        return ret
 
 
 class SQLite3Lookup(DBAPI2Lookup):
