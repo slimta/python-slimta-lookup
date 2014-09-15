@@ -44,6 +44,9 @@ class LookupAuth(Auth):
     This class is not compatible with ``CRAM-MD5`` or other auth mechanisms
     that require plain text passwords.
 
+    :param lookup: The slimta lookup driver, implementing the
+                   :class:`~slimta.lookup.drivers.LookupBase` interface.
+
     """
 
     def __init__(self, lookup):
