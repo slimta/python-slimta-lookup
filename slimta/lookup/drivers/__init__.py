@@ -87,7 +87,7 @@ class LookupBase(object):
         """
         logger = logging.getLogger(name)
         operation = 'notfound' if ret is None else 'found'
-        logline(logger.debug, 'lookup', id(self), operation, info=kwargs)
+        logline(logger.debug, 'lookup', id(self), operation, **kwargs)
 
 
 # vim:et:fdm=marker:sts=4:sw=4:ts=4
