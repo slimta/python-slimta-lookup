@@ -19,7 +19,7 @@
 # THE SOFTWARE.
 #
 
-"""Implements slimta lookup against a `DB-API 2.0`_ database interface. This
+"""Implements slimta lookup against a `DB API 2.0`_ database interface. This
 driver should be flexible enough to support any implementing database.
 
 Any database used with this driver should use gevent sockets (or
@@ -27,7 +27,7 @@ monkey-patching) to ensure good performance.
 
 This module also provides a SQLite_ convenience class.
 
-.. _DB-API 2.0: http://legacy.python.org/dev/peps/pep-0249/
+.. _DB API 2.0: http://legacy.python.org/dev/peps/pep-0249/
 .. _SQLite: http://www.sqlite.org/
 .. _context manager: \
 https://docs.python.org/2/library/stdtypes.html#context-manager-types
