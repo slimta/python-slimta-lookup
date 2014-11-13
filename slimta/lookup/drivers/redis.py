@@ -97,14 +97,6 @@ class RedisLookup(LookupBase):
         return self.redis.hgetall(key)
 
     def lookup(self, **kwargs):
-        """Using the keyword arguments as macros to produce a key string from
-        ``key_template``, the value associated with the key is returned.
-
-        :param kwargs: Used to produce a key string from the template.
-        :type kwargs: keyword arguments
-        :returns: A dictionary if a record was found, ``None`` otherwise.
-
-        """
         try:
             key = self.key_template.format(**kwargs)
         except KeyError:

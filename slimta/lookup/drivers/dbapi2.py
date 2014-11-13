@@ -113,14 +113,6 @@ class DBAPI2Lookup(LookupBase):
                 cur.close()
 
     def lookup(self, **kwargs):
-        """Using the keyword arguments as macros to produce a key string from
-        ``key_template``, the value associated with the key is returned.
-
-        :param kwargs: Used to produce a key string from the template.
-        :type kwargs: keyword arguments
-        :returns: A dictionary if a record was found, ``None`` otherwise.
-
-        """
         ret = self._do_lookup(kwargs)
         self.log(__name__, kwargs, ret)
         return ret
