@@ -41,8 +41,8 @@ class DictLookup(LookupBase):
                     dictionary-like objects.
     :type backend: collections.Mapping
     :param key_template: This template string is used to determine the key
-                         string to lookup. :The :py:meth:`~str.format` method
-                         is called with keyword arguments, given the keyword
+                         string to lookup. The :py:meth:`str.format` method is
+                         called with keyword arguments, given the keyword
                          arguments passed in to :meth:`.lookup`.
     :type key_template: str
 
