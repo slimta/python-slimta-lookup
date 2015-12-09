@@ -1,6 +1,6 @@
 
 from redis import StrictRedis
-from mox import MoxTestBase, IsA
+from mox3.mox import MoxTestBase, IsA
 
 from slimta.lookup.drivers.redis import RedisLookup
 
