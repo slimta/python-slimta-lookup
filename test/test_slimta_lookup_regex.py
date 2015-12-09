@@ -1,5 +1,5 @@
 
-from mox import MoxTestBase
+from mox3.mox import MoxTestBase
 
 from slimta.lookup.drivers.regex import RegexLookup
 
