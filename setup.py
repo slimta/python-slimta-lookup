@@ -23,7 +23,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='python-slimta-lookup',
-      version='0.2.0',
+      version='0.2.1',
       author='Ian Good',
       author_email='icgood@gmail.com',
       description='Control slimta actions and policies with external lookups.',
@@ -31,7 +31,8 @@ setup(name='python-slimta-lookup',
       url='http://slimta.org/',
       packages=find_packages(),
       namespace_packages=['slimta'],
-      install_requires=['passlib'],
+      install_requires=['python-slimta >= 3.0',
+                        'passlib'],
       extras_require={'redis': ['redis']},
       classifiers=['Development Status :: 3 - Alpha',
                    'Topic :: Communications :: Email :: Mail Transport Agents',
