@@ -23,7 +23,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='python-slimta-lookup',
-      version='0.1.1',
+      version='0.2.0',
       author='Ian Good',
       author_email='icgood@gmail.com',
       description='Control slimta actions and policies with external lookups.',
@@ -32,17 +32,17 @@ setup(name='python-slimta-lookup',
       packages=find_packages(),
       namespace_packages=['slimta'],
       install_requires=['passlib'],
-      extras_require={
-          'redis': ['redis'],
-      },
+      extras_require={'redis': ['redis']},
       classifiers=['Development Status :: 3 - Alpha',
                    'Topic :: Communications :: Email :: Mail Transport Agents',
                    'Intended Audience :: Developers',
                    'Intended Audience :: Information Technology',
                    'License :: OSI Approved :: MIT License',
                    'Programming Language :: Python',
-                   'Programming Language :: Python :: 2.6',
-                   'Programming Language :: Python :: 2.7'])
+                   'Programming Language :: Python :: 2.7',
+                   'Programming Language :: Python :: 3.3',
+                   'Programming Language :: Python :: 3.4',
+                   'Programming Language :: Python :: 3.5'])
 
 
 # vim:et:fdm=marker:sts=4:sw=4:ts=4
