@@ -10,7 +10,8 @@ external lookups. This extension is for convenience and does not provide any
 new functionality. It was inspired by and is mostly compatible with [Dovecot's
 password database][4] concept.
 
-[![Build Status](http://ci.slimta.org/job/python-slimta-lookup/badge/icon)](http://ci.slimta.org/job/python-slimta-lookup/)
+[![Build Status](https://travis-ci.org/slimta/python-slimta-lookup.svg?branch=master)](https://travis-ci.org/slimta/python-slimta-lookup)
+[![Coverage Status](https://coveralls.io/repos/github/slimta/python-slimta-lookup/badge.svg?branch=master)](https://coveralls.io/github/slimta/python-slimta-lookup?branch=master)
 
 Getting Started
 ===============
@@ -22,7 +23,7 @@ Started" section. Once inside your virtualenv:
 
 To run the suite of included unit tests:
 
-    (.venv)$ nosetests
+    (.venv)$ py.test
 
 [1]: http://slimta.org/
 [2]: https://github.com/slimta/python-slimta
