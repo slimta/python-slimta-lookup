@@ -97,10 +97,7 @@ class RedisLookup(LookupBase):
         return self.redis.hgetall(key)
 
     def lookup(self, **kwargs):
-        try:
-            key = self.key_template.format(**kwargs)
-        except KeyError:
-            return
+        key = self._format_key(self.key_template, kwargs)
         ret = self._key_lookup(key)
         self.log(__name__, kwargs, ret)
         return ret

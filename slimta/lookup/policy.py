@@ -73,18 +73,41 @@ class LookupPolicy(QueuePolicy):
         for key, val in headers.items():
             envelope.prepend_header(key, val)
 
+    def _verp_enc(self, address, on_domain):
+        localpart, _, domain = address.rpartition('@')
+        if localpart:
+            return '{0!s}={1!s}@{2!s}'.format(localpart, domain, on_domain)
+        else:
+            return '{0!s}@{1!s}'.format(domain, on_domain)
+
+    def _get_alias(self, address, alias):
+        if '@' in alias:
+            return alias
+        else:
+            localpart, _, domain = address.rpartition('@')
+            if localpart:
+                return '{0!s}@{1!s}'.format(localpart, alias)
+            else:
+                return alias
+
     def apply(self, envelope):
         if self.on_sender:
-            ret = self.lookup.lookup_address(envelope.sender)
+            ret = self.lookup.lookup_address(envelope.sender) or {}
+            if 'verp' in ret:
+                envelope.sender = self._verp_enc(envelope.sender, ret['verp'])
             if 'alias' in ret:
-                envelope.sender = ret['alias']
+                envelope.sender = self._get_alias(
+                        envelope.sender, ret['alias'])
             if 'add_headers' in ret:
                 self._add_headers(envelope, ret['add_headers'])
         if self.on_rcpts:
             for i, rcpt in enumerate(envelope.recipients):
-                ret = self.lookup.lookup_address(rcpt)
+                ret = self.lookup.lookup_address(rcpt) or {}
+                if 'verp' in ret:
+                    envelope.recipients[i] = self._verp_enc(rcpt, ret['verp'])
                 if 'alias' in ret:
-                    envelope.recipients[i] = ret['alias']
+                    envelope.recipients[i] = self._get_alias(
+                            rcpt, ret['alias'])
                 if 'add_headers' in ret:
                     self._add_headers(envelope, ret['add_headers'])
 

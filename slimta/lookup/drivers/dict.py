@@ -54,12 +54,11 @@ class DictLookup(LookupBase):
         self.key_template = key_template
 
     def lookup(self, **kwargs):
-        ret = None
+        key = self._format_key(self.key_template, kwargs)
         try:
-            key = self.key_template.format(**kwargs)
             ret = self.backend[key]
         except KeyError:
-            pass
+            ret = None
         self.log(__name__, kwargs, ret)
         return ret
 
