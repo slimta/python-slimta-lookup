@@ -41,6 +41,15 @@ class LookupBase(object):
 
     """
 
+    def _format_key(self, key_template, kwargs):
+        kwargs = kwargs.copy()
+        while True:
+            try:
+                return key_template.format(**kwargs)
+            except KeyError as exc:
+                key = exc.args[0]
+                kwargs[key] = '{'+key+'}'
+
     def lookup(self, **kwargs):
         """The keyword arguments will be used by the lookup driver to return a
         dictionary-like object that will be used to affect actions or policy.
