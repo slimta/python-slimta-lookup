@@ -23,7 +23,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='python-slimta-lookup',
-      version='0.3.0',
+      version='0.3.1',
       author='Ian Good',
       author_email='icgood@gmail.com',
       description='Control slimta actions and policies with external lookups.',

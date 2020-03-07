@@ -81,10 +81,11 @@ class LookupPolicy(QueuePolicy):
             return '{0!s}@{1!s}'.format(domain, on_domain)
 
     def _get_alias(self, address, alias):
+        localpart, _, domain = address.rpartition('@')
+        alias = alias.format(localpart=localpart, domain=domain)
         if '@' in alias:
             return alias
         else:
-            localpart, _, domain = address.rpartition('@')
             if localpart:
                 return '{0!s}@{1!s}'.format(localpart, alias)
             else:
